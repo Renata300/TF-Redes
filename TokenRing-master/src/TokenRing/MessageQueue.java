@@ -44,7 +44,7 @@ public class MessageQueue {
                 // System.out.println("Comando Posição 1 = " + comando[1]);
 
                 // Se for o comando de envio de mensagem...
-                if (comando[0].trim().compareToIgnoreCase("4066") == 0){
+                if (comando[0].trim().compareToIgnoreCase("2222") == 0){
 
                     String mensagem[] = comando[1].split(":");
 
@@ -54,6 +54,13 @@ public class MessageQueue {
                         // System.out.println("Msg Posição 0 = " + mensagem[0]);
                         // System.out.println("Msg Posição 1 = " + mensagem[1]);
                         // System.out.println("Msg Posição 2 = " + mensagem[2]);
+
+                        if(mensagem.length<3){
+                            
+                              System.out.println(" NAK messagem errado ");
+                        }
+                        else {System.out.println(" NAK messagem errada ");
+                    }
 
                         // Adiciona a mensagem ao final da fila
                         this.queue.add(message);
@@ -93,5 +100,4 @@ public class MessageQueue {
     public Integer getTamanho(){
         return this.queue.size();
     }
-    
 }
