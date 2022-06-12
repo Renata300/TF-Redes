@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TokenRing.GUI;
 
 import TokenRing.MessageController;
@@ -24,7 +19,7 @@ public class FrmFila extends javax.swing.JFrame {
         initComponents();
         this.nickname = nickname;
         this.queue = queue;
-        this.campoCodigo.setText("4066");
+        this.campoCodigo.setText("2222");
         this.campoOrigem.setText(nickname);
         this.campoDestino.setText("");
         this.campoMensagem.setText("");
@@ -69,7 +64,7 @@ public class FrmFila extends javax.swing.JFrame {
         jLabel1.setText("Código");
 
         campoCodigo.setEditable(false);
-        campoCodigo.setText("4066");
+        campoCodigo.setText("2222");
 
         campoOrigem.setEditable(false);
 
