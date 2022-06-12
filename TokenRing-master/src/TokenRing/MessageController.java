@@ -64,7 +64,7 @@ public class MessageController implements Runnable {
         if (msg.trim().length() > 0){
 
             // Verifica se a mensagem possui ponto-e-vírgula.
-            // Caso haja, pode ser mensagem tipo 4066 (mensagem) ou 4067 (ACK).
+            // Caso haja, pode ser mensagem tipo 2222 (mensagem) ou 1111 (ACK).
             if (msg.indexOf(";") > 0){
 
                 String comando[] = msg.split(";");
@@ -72,8 +72,8 @@ public class MessageController implements Runnable {
                 // System.out.println("Comando recepcionado - Posição 0 = " + comando[0]);
                 // System.out.println("Comando recepcionado - Posição 1 = " + comando[1]);
                 
-                // 4066 - MENSAGEM
-                if (comando[0].trim().compareToIgnoreCase("4066") == 0){
+                // 2222 - MENSAGEM
+                if (comando[0].trim().compareToIgnoreCase("2222") == 0){
                     
                     String mensagem[] = comando[1].split(":");
 
@@ -92,7 +92,7 @@ public class MessageController implements Runnable {
                         if (nickname.compareToIgnoreCase(destino) == 0){
                             
                             // Envia o ACK a máquina de ORIGEM da mensagem
-                            String msgACK = "4067;" + origem;
+                            String msgACK = "1111;" + origem;
                             
                             // Informa ao usuário que recebeu a mensagem
                             System.out.println("     Sou o destinatário desta mensagem!");
@@ -104,14 +104,14 @@ public class MessageController implements Runnable {
                             
                         // Se a máquina de destino não existir na rede...
                         } else if (nickname.compareToIgnoreCase(destino) == 0){                                
-                            
+                               System.out.println(" maquinanaoexiste");
+                               
                             // Informa ao usuário que vai liberar o token
-                            System.out.println("     Destinatário da mensagem não localizado nesta rede!");
-                            System.out.println("     TOKEN será liberado...!");
+                            System.out.println(" TOKEN será liberado...!");
                             
                             // libera o token
                             this.token = false;
-                            this.enviaMensagem("4060");
+                            this.enviaMensagem("2222");
                             
                         // Se o destinatário da mensagem não for a minha máquina,
                         // repassa a mensagem adiante
@@ -127,8 +127,8 @@ public class MessageController implements Runnable {
                         
                     } // fim do if da validação da mensagem (length == 3)
                     
-                // 4067 - ACK
-                } else if (comando[0].trim().compareToIgnoreCase("4067") == 0){
+                // 1111 - ACK
+                } else if (comando[0].trim().compareToIgnoreCase("1111") == 0){
                     
                     // Se o destinatário da ACK for a minha máquina...
                     if (nickname.compareToIgnoreCase(comando[1].trim()) == 0){
@@ -143,7 +143,7 @@ public class MessageController implements Runnable {
                         
                         // Repassa o Token para a máquina da direita
                         this.token = false;
-                        this.enviaMensagem("4060");
+                        this.enviaMensagem("2222");
                         
                     // Se o destinatário da ACK não for a minha máquina...
                     } else {
@@ -160,7 +160,7 @@ public class MessageController implements Runnable {
                 }
                 
             // Se não possuir ponto-e-vírgula, pode ser apenas 
-            // mensagem do tipo 4060 (token liberado).
+            // mensagem do tipo 2222 (token liberado).
             } else {
                 
                 // Recepciona o token              
@@ -294,7 +294,7 @@ public class MessageController implements Runnable {
                         
                     // Repassa o Token para a máquina da direita
                     this.token = false;
-                    this.enviaMensagem("4060");
+                    this.enviaMensagem("2222");
                     
                 // ENVIA A MENSAGEM PELA PRIMEIRA VEZ
                 } else {
@@ -352,7 +352,7 @@ public class MessageController implements Runnable {
                             
                             // libera o token para o próximo
                             this.token = false;
-                            enviaMensagem("4060");
+                            enviaMensagem("2222");
                             
                         }
 
@@ -421,9 +421,6 @@ public class MessageController implements Runnable {
             
         } catch (IOException ex) {
             Logger.getLogger(MessageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }   
     }
-    
-    
 }
